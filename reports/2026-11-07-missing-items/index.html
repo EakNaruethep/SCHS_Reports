@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ของที่ลูกค้าถามแล้วไม่มี</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@500;600;700&family=IBM+Plex+Sans+Thai:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: one narrow report column; ledger-style tables, a scaled bar list, a ranked order sheet */
+:root{
+  --bg:#f4f5f6; --paper:#ffffff; --ink:#1c2228; --muted:#5d6873; --line:#d5dadf;
+  --steel:#3d5466; --zinc:#b88a1c; --zinc-soft:#f3e9cf; --bar:#7f94a5; --flag:#a4462f; --flag-soft:#f6e3dd;
+  --f-display:"Bai Jamjuree","IBM Plex Sans Thai",system-ui,sans-serif;
+  --f-body:"IBM Plex Sans Thai",system-ui,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#14181c; --paper:#1c2227; --ink:#e6eaee; --muted:#9aa6b1; --line:#323b43;
+  --steel:#9fb6c8; --zinc:#e0b44a; --zinc-soft:#3a3120; --bar:#6c8396; --flag:#e88a70; --flag-soft:#3c2620; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#14181c; --paper:#1c2227; --ink:#e6eaee; --muted:#9aa6b1; --line:#323b43;
+  --steel:#9fb6c8; --zinc:#e0b44a; --zinc-soft:#3a3120; --bar:#6c8396; --flag:#e88a70; --flag-soft:#3c2620; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.7}
+.wrap{max-width:960px;margin:0 auto;padding-block:32px 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:40px}
+header{display:flex;flex-direction:column;gap:8px;border-bottom:2px solid var(--ink);padding-bottom:20px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;color:var(--muted);text-transform:uppercase}
+h1{font-family:var(--f-display);font-weight:700;font-size:clamp(26px,5vw,38px);line-height:1.25;margin:0;text-wrap:balance}
+h2{font-family:var(--f-display);font-weight:600;font-size:22px;margin:0;text-wrap:balance}
+h3{font-family:var(--f-display);font-weight:600;font-size:17px;margin:0}
+p{margin:0;max-width:68ch}
+.lede{color:var(--muted)}
+section{display:flex;flex-direction:column;gap:16px}
+.facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid var(--line);background:var(--paper)}
+.facts div{padding:14px 16px;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:2px}
+.facts div:last-child{border-right:0}
+.facts b{font-family:var(--f-display);font-size:28px;font-weight:700;font-variant-numeric:tabular-nums;line-height:1.2}
+.facts span{font-size:13px;color:var(--muted)}
+@media (max-width:640px){.facts{grid-template-columns:repeat(2,minmax(0,1fr))}.facts div:nth-child(2){border-right:0}.facts div:nth-child(-n+2){border-bottom:1px solid var(--line)}}
+.tbl{overflow-x:auto;border:1px solid var(--line);background:var(--paper)}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{text-align:left;vertical-align:top;padding:10px 12px;border-bottom:1px solid var(--line)}
+th{font-family:var(--f-display);font-weight:600;font-size:13px;color:var(--muted);background:var(--bg);white-space:nowrap}
+tr:last-child td{border-bottom:0}
+td.num{font-family:var(--f-mono);color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.rank td:first-child{font-family:var(--f-display);font-weight:700;font-size:22px;color:var(--zinc);width:48px;text-align:center}
+.rank td strong{display:block}
+.bars{display:flex;flex-direction:column;gap:8px;background:var(--paper);border:1px solid var(--line);padding:16px}
+.bar{display:grid;grid-template-columns:minmax(0,190px) minmax(0,1fr) 28px;gap:12px;align-items:center;font-size:14px}
+.bar .track{height:14px;background:var(--bg)}
+.bar .fill{height:100%;background:var(--bar)}
+.bar .fill.core{background:var(--zinc)}
+.bar b{font-family:var(--f-mono);font-variant-numeric:tabular-nums;text-align:right}
+.note{font-size:13px;color:var(--muted)}
+.key{display:inline-block;width:10px;height:10px;background:var(--zinc);margin-right:6px;vertical-align:middle}
+.lvl{font-family:var(--f-mono);font-size:12px;white-space:nowrap}
+.lvl.hi{color:var(--zinc)}
+tr.q td{background:var(--flag-soft)}
+.cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+@media (max-width:640px){.cols{grid-template-columns:1fr}.bar{grid-template-columns:minmax(0,120px) minmax(0,1fr) 24px}}
+.box{background:var(--paper);border:1px solid var(--line);padding:16px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.box ul,.box ol{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px}
+.pending{border-color:var(--flag)}
+.pending h3{color:var(--flag)}
+details{background:var(--paper);border:1px solid var(--line)}
+summary{cursor:pointer;padding:12px 16px;font-family:var(--f-display);font-weight:600}
+summary:focus-visible{outline:2px solid var(--steel);outline-offset:2px}
+details .tbl{border:0;border-top:1px solid var(--line)}
+footer{font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:16px}
+</style>
+</head>
+<body>
+
+
+<div class="wrap">
+<header>
+  <div class="eyebrow">ส.เจริญโฮมสแควร์ · สรุปจากสมุดจดหน้าร้าน</div>
+  <h1>ของที่ลูกค้าถามหน้าร้านแล้วไม่มี</h1>
+  <p class="lede">ช่วงวันที่ 12 ต.ค. ถึง 6 พ.ย. 2569 ถอดจากสมุดจด 2 แผ่น และวิเคราะห์เมื่อ 7 พ.ย. 2569 ข้อมูลยังน้อย จึงใช้ดูแนวโน้มได้ แต่ยังไม่ควรใช้สั่งของล็อตใหญ่</p>
+</header>
+
+<div class="facts">
+  <div><b>42</b><span>รายการที่จดไว้</span></div>
+  <div><b>26</b><span>วันที่เก็บข้อมูล</span></div>
+  <div><b>15</b><span>รายการที่ไม่ได้จดจำนวน</span></div>
+  <div><b>12</b><span>คำที่ลายมืออ่านไม่ชัด</span></div>
+</div>
+
+<section>
+  <h2>สินค้าที่ควรรีบสั่ง 5 อันดับ</h2>
+  <p class="note">จัดอันดับจาก 4 อย่าง คือ ตรงกับลูกค้าพุกเคมีและสตัดไหม, ถามทีละเยอะไหม, ถามซ้ำไหม และเก็บง่ายไหม ทุกอันดับแนะนำให้สั่งล็อตเล็กก่อน</p>
+  <div class="tbl"><table class="rank">
+    <thead><tr><th>อันดับ</th><th>สินค้า</th><th>หลักฐานจากสมุด</th><th>เหตุผล</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td><strong>น็อต สกรู แหวน ชุบ M10 และ M12</strong>ยาว 2 ถึง 4 นิ้ว รวมสกรูหัวจม M10/M12</td><td>ชุดสกรู+น็อต 1/2" ยาว 4" จำนวน 20 ชุด และสกรูหัวจม M12x30</td><td>ใช้คู่กับสตัดและพุกโดยตรง ร้านมีน็อตกับแหวนในชุดพุกเคมีอยู่แล้ว ไม่เสีย เก็บง่าย</td></tr>
+      <tr><td>2</td><td><strong>พุกสแตนเลส M10</strong>ต้องยืนยันก่อนว่าเป็นพุกเหล็กแบบขยายตัว หรือสตัดพุกเคมีสแตนเลส</td><td>ถาม 50 ตัวในครั้งเดียว และของสแตนเลสถูกถาม 3 ครั้งใน 10 วัน</td><td>ปริมาณต่อครั้งสูงที่สุดในสมุด ถ้าเป็นสตัดพุกเคมี ร้านรับสั่งทำได้อยู่แล้ว</td></tr>
+      <tr><td>3</td><td><strong>ประแจปากตาย/แหวนข้าง</strong>เบอร์ 10, 13, 17, 19, 24</td><td>ถาม 2 ครั้ง (เบอร์ 17 และ 10) และประแจตัว T เบอร์ 10 อีก 1 ครั้ง</td><td>รายการเดียวที่ถามซ้ำชื่อเดิม ราคาไม่สูง เป็นเบอร์ที่ขันน็อตพุก M6 ถึง M16</td></tr>
+      <tr><td>4</td><td><strong>ดอกเจาะคอนกรีตขนาดตรงกับพุก</strong>12, 14, 18, 22, 26 มม. และดอกเจาะเหล็ก/สแตนเลส</td><td>ดอกเจาะสแตนเลส 1/8" และโฮลซอเจาะปูน 4"</td><td>ลูกค้าพุกเคมีต้องเจาะรูทุกงาน ถ้ามีดอกเจาะ ลูกค้าก็ซื้อครบได้ในร้านเดียว</td></tr>
+      <tr><td>5</td><td><strong>ลวดสลิง 3 และ 4 มิล</strong>พร้อมกิ๊บจับสลิงและเกลียวเร่ง</td><td>ถาม 2 ม้วน มาพร้อมพุกและน็อตในวันเดียวกัน (5 พ.ย.)</td><td>ใช้ในงานแขวนคู่กับพุกและน็อต ขายเป็นชุดได้</td></tr>
+    </tbody>
+  </table></div>
+  <p class="note">ทำได้ทันทีโดยไม่ต้องสั่งของ: เช็คว่าน้ำยาเสียบเหล็ก Stahl SVM-VSF-H-S วางที่หน้าร้านแล้วหรือยัง เพราะมีลูกค้าถามหาอีพ็อกซี่เสียบเหล็กเมื่อ 16 ต.ค.</p>
+</section>
+
+<section>
+  <h2>ภาพรวมในตารางเดียว</h2>
+  <div class="tbl"><table>
+    <thead><tr><th>หัวข้อ</th><th>ข้อค้นพบ</th><th>ความหมายต่อร้าน</th></tr></thead>
+    <tbody>
+      <tr><td>หมวดที่ถามบ่อยสุด</td><td>กาว/สี 9 ครั้ง, น็อต สกรู พุก 8 ครั้ง, เครื่องมือ 7 ครั้ง</td><td>กาว/สีถามเยอะแต่ไม่ซ้ำกันเลย ส่วนน็อตกับพุกถามทีละมาก</td></tr>
+      <tr><td>ปริมาณต่อครั้งสูงสุด</td><td>พุกสแตนเลส M10 50 ตัว, ชุดสกรู+น็อต 20 ชุด, ปูนรวม 25 ถุงใน 3 ครั้ง</td><td>ลูกค้ารายใหญ่มาหาของยึดติดกับปูน</td></tr>
+      <tr><td>ของที่ถามซ้ำ</td><td>ประแจปากตาย 2 ครั้ง, ปูน 3 ครั้ง, ของสแตนเลส 3 ครั้งใน 10 วัน</td><td>สแตนเลสตรงกับสตัดสแตนเลส 304 ที่ร้านเพิ่งเริ่มรับสั่งทำ</td></tr>
+      <tr><td>ลูกค้า ถ้านับจำนวนครั้ง</td><td>ช่างซ่อมบำรุงอาคาร/โรงงาน และชาวบ้าน ซื้ออย่างละชิ้น</td><td>ถามบ่อย แต่ยอดต่อบิลต่ำ</td></tr>
+      <tr><td>ลูกค้า ถ้านับปริมาณ</td><td>ผู้รับเหมางานติดตั้ง และผู้รับเหมาต่อเติม/งานปูน</td><td>เป็นกลุ่มเดียวกับลูกค้าพุกเคมี ถ้าหาของไม่ครบ อาจย้ายไปซื้อพุกเคมีที่ร้านอื่นด้วย</td></tr>
+      <tr><td>ยังไม่ควรสต็อก</td><td>กาว สี ประปา เชือกฟาง ไม้อัด ฟิวเจอร์บอร์ด</td><td>ถามครั้งเดียว จำนวนน้อย ไม่ตรงกลุ่มลูกค้าหลัก</td></tr>
+      <tr><td>ต้องตัดสินใจเชิงธุรกิจ</td><td>ปูนถุง, สายไฟแบ่งตัดขายเป็นเมตร</td><td>มีปริมาณ แต่ของหนัก กำไรต่ำ หรือต้องถือม้วนนาน</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section>
+  <h2>ถามตามหมวด</h2>
+  <div class="bars" role="list">
+    <div class="bar" role="listitem"><span>กาว ซีล สี ตัวทำละลาย</span><div class="track"><div class="fill" style="width:100%"></div></div><b>9</b></div>
+    <div class="bar" role="listitem"><span>น็อต สกรู พุก ยึดติด</span><div class="track"><div class="fill core" style="width:88.9%"></div></div><b>8</b></div>
+    <div class="bar" role="listitem"><span>เครื่องมือช่าง ดอกเจาะ</span><div class="track"><div class="fill core" style="width:77.8%"></div></div><b>7</b></div>
+    <div class="bar" role="listitem"><span>ไฟฟ้า</span><div class="track"><div class="fill" style="width:55.6%"></div></div><b>5</b></div>
+    <div class="bar" role="listitem"><span>ปูน และวัสดุแผ่น</span><div class="track"><div class="fill" style="width:55.6%"></div></div><b>5</b></div>
+    <div class="bar" role="listitem"><span>อื่นๆ / อ่านไม่ออก</span><div class="track"><div class="fill" style="width:55.6%"></div></div><b>5</b></div>
+    <div class="bar" role="listitem"><span>ประปา สุขภัณฑ์</span><div class="track"><div class="fill" style="width:33.3%"></div></div><b>3</b></div>
+  </div>
+  <p class="note"><span class="key"></span>หมวดที่ใกล้สินค้าหลักของร้าน (พุกเคมีและสตัด) ทุกหมวดรวมกัน 42 ครั้ง</p>
+</section>
+
+<section>
+  <h2>ลูกค้าน่าจะเป็นใคร</h2>
+  <p class="note">สมุดไม่ได้จดว่าใครเป็นคนถาม ทุกข้อจึงเป็นการเดาจากชนิด ขนาด และจำนวนของที่ถาม</p>
+  <div class="tbl"><table>
+    <thead><tr><th>ลูกค้า</th><th>หลักฐานในสมุด</th><th>น้ำหนัก</th></tr></thead>
+    <tbody>
+      <tr><td><strong>ผู้รับเหมางานติดตั้ง/โครงเหล็ก</strong></td><td>วันที่ 5 พ.ย. ถามพุก 50 ตัว น็อต 20 ชุด สลิง 2 ม้วน พร้อมกัน, อีพ็อกซี่เสียบเหล็ก, ลวดเชื่อม</td><td class="lvl hi">สูง</td></tr>
+      <tr><td><strong>ช่างซ่อมบำรุงอาคาร โรงงาน หรือหมู่บ้าน</strong></td><td>ของหลายหมวดปนกันครั้งละชิ้น วันที่ 26 ต.ค. วันเดียวมีทั้งไฟฟ้า ประปา ดอกเจาะ ประแจ</td><td class="lvl hi">สูง</td></tr>
+      <tr><td><strong>ช่างไฟโรงงาน/ช่างตู้คอนโทรล</strong></td><td>รางวายดักท์, ยางกันบาดตู้ไฟ, สาย Yazaki, บล็อกกันน้ำ</td><td class="lvl">ปานกลาง</td></tr>
+      <tr><td><strong>โรงงานหรือช่างเครื่องกล</strong></td><td>สกรูหัวจม M12x30, ประแจตัว T, ของสแตนเลส 3 รายการ</td><td class="lvl">ปานกลาง</td></tr>
+      <tr><td><strong>ผู้รับเหมาต่อเติมบ้าน/ช่างปูน</strong></td><td>ปูนรวม 25 ถุง, เกรียง, ไม้อัด, โฮลซอเจาะปูน</td><td class="lvl">ปานกลาง</td></tr>
+      <tr><td><strong>ชาวบ้านทั่วไปซ่อมเอง</strong></td><td>กาวร้อนหลอดเล็ก, สีสเปรย์, เชือกฟาง, ตลับเมตรราคาถูก, ของชักโครก, สายไฟ 7 เมตร</td><td class="lvl">ปานกลาง</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section>
+  <h2>ของที่น่าจะใช้ในงานเดียวกัน</h2>
+  <div class="cols">
+    <div class="box"><h3>ยึด แขวน ติดตั้งโครง</h3><p>พุกสแตนเลส M10, ชุดสกรู+น็อต 1/2", ลวดสลิง, ประแจปากตาย ถามวันเดียวกัน (5 พ.ย.) ดูเป็นงานแขวนท่อ ราง ป้าย หรือกันสาด</p></div>
+    <div class="box"><h3>งานสแตนเลส</h3><p>ดอกเจาะสแตนเลส, ลวดเชื่อมสแตนเลส, พุกสแตนเลส ถาม 3 ครั้งใน 10 วัน น่าจะเป็นงานกลางแจ้งหรือโรงงานอาหาร</p></div>
+    <div class="box"><h3>ตู้ไฟ เดินสาย</h3><p>สาย Yazaki 1x2.5 เขียวกับขาว, รางวายดักท์, ยางกันบาดตู้ไฟ, บล็อกกันน้ำ 4x4</p></div>
+    <div class="box"><h3>ก่อ ฉาบ ต่อเติม</h3><p>ปูนเสือมวลเบา, ปูนจิงโจ้, ปูนปอร์ตแลนด์, เกรียง, ไม้อัด, ตะปู, โฮลซอเจาะปูน</p></div>
+    <div class="box"><h3>ห้องน้ำ ประปา</h3><p>สายน้ำดีชักโครก, ยางกันกลิ่น 4", ข้องอ 1/2", PU โฟม, แด๊ป</p></div>
+    <div class="box"><h3>ตกแต่ง ป้าย เฟอร์นิเจอร์</h3><p>ลูกแม็กยิงผ้า 1006F, ฟิวเจอร์บอร์ด, เทปสองหน้า 3M, กาวร้อน, สีสเปรย์, ทินเนอร์</p></div>
+  </div>
+</section>
+
+<section>
+  <h2>รอคุณ Eak ตัดสินใจ</h2>
+  <div class="cols">
+    <div class="box pending"><h3>ต้องตอบก่อนสั่งของ</h3><ol>
+      <li>พุกสแตนเลส M10 เป็นพุกเหล็กแบบขยายตัว หรือสตัดพุกเคมีสแตนเลส</li>
+      <li>จะขายปูนถุงไหม</li>
+      <li>จะเอาสายไฟมาแบ่งตัดขายเป็นเมตรไหม</li>
+      <li>น้ำยาเสียบเหล็ก Stahl วางหน้าร้านแล้วหรือยัง</li>
+    </ol></div>
+    <div class="box"><h3>ปรับสมุดจดให้ใช้ได้ดีขึ้น</h3><ul>
+      <li>เพิ่มช่อง "ลูกค้าเป็นใคร" เช่น ผู้รับเหมา ช่าง บ้าน หรือบริษัท</li>
+      <li>เพิ่มช่อง "ซื้ออย่างอื่นด้วยไหม"</li>
+      <li>จดจำนวนทุกครั้ง</li>
+      <li>เก็บต่ออีก 1 เดือนแล้ววิเคราะห์ซ้ำ</li>
+    </ul></div>
+  </div>
+</section>
+
+<details>
+  <summary>ดูรายการที่ถอดจากสมุดทั้ง 42 รายการ</summary>
+  <div class="tbl"><table>
+    <thead><tr><th>#</th><th>วันที่</th><th>ชื่อสินค้า</th><th>ยี่ห้อ / รุ่น</th><th>ขนาด / สี</th><th>จำนวน</th></tr></thead>
+    <tbody>
+<tr class="q"><td class="num">1</td><td>12/10/69</td><td>แด๊ป (?) ยาแนว/ซีลแลนท์</td><td></td><td>สีน้ำตาล (คำท้ายอ่านไม่ออก)</td><td>1</td></tr>
+<tr><td class="num">2</td><td>12/10/69</td><td>ข้องอ 90 องศา</td><td></td><td>1/2&quot; (4 หุน)</td><td>6</td></tr>
+<tr><td class="num">3</td><td>12/10/69</td><td>ฟิวเจอร์บอร์ด</td><td></td><td></td><td>1</td></tr>
+<tr><td class="num">4</td><td>12/10/69</td><td>เชือกฟาง</td><td></td><td></td><td>1</td></tr>
+<tr><td class="num">5</td><td>12/10/69</td><td>PU โฟม</td><td></td><td>ขาว</td><td>2</td></tr>
+<tr><td class="num">6</td><td>13/10/69</td><td>ปืนกาว</td><td></td><td></td><td>1</td></tr>
+<tr class="q"><td class="num">7</td><td>13/10/69</td><td>โฮลซอเจาะปูน (?)</td><td></td><td>4 นิ้ว</td><td>1</td></tr>
+<tr class="q"><td class="num">8</td><td>13/10/69</td><td>เกรียงแหลม (?)</td><td></td><td>3 นิ้ว</td><td>ไม่ระบุ</td></tr>
+<tr><td class="num">9</td><td>13/10/69</td><td>ตะปูตอกไม้</td><td></td><td>2 นิ้ว</td><td>ไม่ระบุ</td></tr>
+<tr><td class="num">10</td><td>14/10/69</td><td>ลูกแม็กยิงผ้า</td><td></td><td>1006F</td><td>1</td></tr>
+<tr><td class="num">11</td><td>14/10/69</td><td>สีสเปรย์</td><td></td><td>สีเทา</td><td>1</td></tr>
+<tr class="q"><td class="num">12</td><td>15/10/69</td><td>ถุงมือกันบาด (?)</td><td></td><td>สีดำ, น้ำเงิน</td><td>ไม่ระบุ</td></tr>
+<tr class="q"><td class="num">13</td><td>16/10/69</td><td>กาวมหาอุด (?)</td><td></td><td></td><td>1</td></tr>
+<tr class="q"><td class="num">14</td><td>16/10/69</td><td>อีพ็อกซี่เสียบเหล็ก (คำท้าย &quot;2 ตัน/ตัว&quot; อ่านไม่ชัด)</td><td></td><td></td><td>ไม่ระบุ</td></tr>
+<tr><td class="num">15</td><td>17/10/69</td><td>กาวร้อน</td><td></td><td>หลอดเล็ก</td><td>1</td></tr>
+<tr><td class="num">16</td><td>17/10/69</td><td>กาวสองหน้า (เทปกาวสองหน้า)</td><td>3M</td><td>สีเทา</td><td>1</td></tr>
+<tr class="q"><td class="num">17</td><td>19/10/69</td><td>สีเคลือบเงา (คำต่อท้ายอ่านไม่ออก)</td><td></td><td></td><td>ไม่ระบุ</td></tr>
+<tr><td class="num">18</td><td>20/10/69</td><td>สกรูหัวจม สีดำ</td><td></td><td>M12 x 30</td><td>ไม่ระบุ</td></tr>
+<tr><td class="num">19</td><td>21/10/69</td><td>ปูนตราเสือ ก่อฉาบอิฐมวลเบา</td><td>เสือ</td><td>ถุงเขียว</td><td>5</td></tr>
+<tr class="q"><td class="num">20</td><td>23/10/69</td><td>ผ้า... (อ่านไม่ออก เหมือน &quot;ผ้า ซ่อง เซอร์วิส&quot;)</td><td></td><td></td><td>ไม่ระบุ</td></tr>
+<tr><td class="num">21</td><td>26/10/69</td><td>บล็อกกันน้ำ แบบเปิดปิด</td><td></td><td>4x4</td><td>1</td></tr>
+<tr><td class="num">22</td><td>26/10/69</td><td>ดอกเจาะสแตนเลส</td><td></td><td>1/8&quot; (1 หุน)</td><td>1</td></tr>
+<tr><td class="num">23</td><td>26/10/69</td><td>สายน้ำดีชักโครก แบบครบชุด</td><td></td><td></td><td>ไม่ระบุ</td></tr>
+<tr class="q"><td class="num">24</td><td>26/10/69</td><td>โซ่/โคมไฟ (?) อ่านไม่ชัด</td><td></td><td></td><td>ไม่ระบุ</td></tr>
+<tr><td class="num">25</td><td>26/10/69</td><td>ประแจปากตาย</td><td></td><td>เบอร์ 17</td><td>1</td></tr>
+<tr><td class="num">26</td><td>26/10/69</td><td>ประแจตัว T</td><td></td><td>เบอร์ 10</td><td>1</td></tr>
+<tr class="q"><td class="num">27</td><td>27/10/69</td><td>ไม้อัด (จดเพิ่มในหมายเหตุ)</td><td></td><td>6 มิล (?)</td><td>ไม่ระบุ</td></tr>
+<tr><td class="num">28</td><td>29/10/69</td><td>ปูนจิงโจ้ (จดเพิ่มในหมายเหตุ)</td><td>จิงโจ้</td><td>เขียว 5, ม่วง 5</td><td>10</td></tr>
+<tr><td class="num">29</td><td>2/11/69</td><td>ตลับเมตร</td><td>รุ่นราคาถูก</td><td>ตัวพลาสติก</td><td>1</td></tr>
+<tr class="q"><td class="num">30</td><td>3/11/69</td><td>ยางกันบาดตู้ไฟ (?)</td><td></td><td></td><td>ไม่ระบุ</td></tr>
+<tr><td class="num">31</td><td>3/11/69</td><td>ลวดเชื่อมสแตนเลส</td><td></td><td></td><td>1</td></tr>
+<tr><td class="num">32</td><td>4/11/69</td><td>สายไฟ สีเขียว</td><td>Yazaki</td><td>1 x 2.5</td><td>7 เมตร</td></tr>
+<tr><td class="num">33</td><td>4/11/69</td><td>สายไฟ สีขาว</td><td>Yazaki</td><td>1 x 2.5</td><td>7 เมตร</td></tr>
+<tr><td class="num">34</td><td>5/11/69</td><td>ลวดสลิง</td><td></td><td>3 มิล, 4 มิล</td><td>2 ม้วน</td></tr>
+<tr><td class="num">35</td><td>5/11/69</td><td>ชุดสกรู + น็อต</td><td>ยาว 4 นิ้ว</td><td>4 หุน (12 มิล)</td><td>20 ชุด</td></tr>
+<tr class="q"><td class="num">36</td><td>5/11/69</td><td>ประแจปากตาย</td><td></td><td>เบอร์ 10 (คำท้ายอ่านไม่ชัด)</td><td>ไม่ระบุ</td></tr>
+<tr><td class="num">37</td><td>5/11/69</td><td>รางวายดักท์</td><td></td><td>สีเทา</td><td>ไม่ระบุ</td></tr>
+<tr><td class="num">38</td><td>5/11/69</td><td>ยางกันกลิ่นชักโครก</td><td></td><td>4 นิ้ว</td><td>ไม่ระบุ</td></tr>
+<tr><td class="num">39</td><td>5/11/69</td><td>พุกสแตนเลส</td><td></td><td>M10</td><td>50 ตัว</td></tr>
+<tr class="q"><td class="num">40</td><td>6/11/69</td><td>ปลอก... (อ่านไม่ออก)</td><td></td><td></td><td>10 ตัว</td></tr>
+<tr><td class="num">41</td><td>6/11/69</td><td>ปูนปอร์ตแลนด์</td><td></td><td></td><td>10 ถุง</td></tr>
+<tr><td class="num">42</td><td>6/11/69</td><td>ทินเนอร์</td><td></td><td>เบอร์ 41</td><td>ไม่ระบุ</td></tr>
+    </tbody>
+  </table></div>
+  <p class="note" style="padding:12px 16px">แถวที่มีพื้นสีคือคำที่ลายมืออ่านไม่ชัด คำในตารางเป็นคำที่เดาจากรูปทรงตัวอักษร</p>
+</details>
+
+<footer>จัดทำ 7 พ.ย. 2569 จากสมุดจดหน้าร้าน ส.เจริญโฮมสแควร์ 2 แผ่น <a href="../../" style="color:inherit">กลับไปหน้ารวมรายงาน</a></footer>
+</div>
+
+</body>
+</html>
