@@ -59,6 +59,40 @@ footer { font-size: 0.85rem; color: var(--muted); }
   td.a::before { content: "คำตอบที่ควรได้"; color: var(--good); }
   td.f::before { content: "ระวังถ้าได้ยินแบบนี้"; color: var(--flag); }
 }
+:root { --seller: #1f5f8b; --seller-bg: #e4eef6; --buyer: #9a5b12; --buyer-bg: #fbf0e0; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --seller: #8cc3ea; --seller-bg: #1a2a37; --buyer: #f0bf7a; --buyer-bg: #33281a; } }
+:root[data-theme="dark"] { --seller: #8cc3ea; --seller-bg: #1a2a37; --buyer: #f0bf7a; --buyer-bg: #33281a; }
+#incoterms { display: grid; gap: 12px; }
+#incoterms h2 { margin: 0; }
+.ic-tabs { display: flex; gap: 8px; flex-wrap: wrap; }
+.ic-tabs button { font: inherit; font-weight: 700; font-size: 1rem; padding: 8px 20px; border: 1px solid var(--line); background: var(--surface); color: var(--fg); cursor: pointer; border-radius: 6px; }
+.ic-tabs button[aria-selected="true"] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.ic-tabs button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.ic-legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 0.88rem; color: var(--muted); }
+.sw { display: inline-block; width: 12px; height: 12px; margin-right: 6px; vertical-align: -1px; border-radius: 2px; }
+.sw-s { background: var(--seller); } .sw-b { background: var(--buyer); }
+.hops { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 0; }
+.hops li { position: relative; display: grid; gap: 4px; align-content: start; padding: 10px; border-top: 4px solid var(--buyer); background: var(--buyer-bg); transition: background .25s, border-color .25s; min-width: 0; }
+.hops li + li { border-left: 1px solid var(--bg); }
+.hops li.s { border-top-color: var(--seller); background: var(--seller-bg); }
+.hops .n { font-size: 0.8rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.hops .h { font-size: 0.9rem; font-weight: 600; line-height: 1.4; }
+.hops .who { font-size: 0.82rem; font-weight: 700; color: var(--buyer); }
+.hops li.s .who { color: var(--seller); }
+.hops li.cut::after { content: "จุดส่งมอบ"; position: absolute; right: -1px; top: -22px; font-size: 0.72rem; font-weight: 700; color: var(--fg); background: var(--bg); padding: 0 4px; transform: translateX(50%); white-space: nowrap; z-index: 1; }
+.hops { margin-top: 18px; }
+.ic-sum { background: var(--surface); border: 1px solid var(--line); padding: 12px 14px; display: grid; gap: 6px; }
+.ic-sum p { margin: 0; }
+.ic-sum b { font-weight: 700; }
+@media (max-width: 760px) {
+  .hops { grid-template-columns: 1fr; margin-top: 0; }
+  .hops li { grid-template-columns: 24px 1fr auto; align-items: center; border-top: 0; border-left: 5px solid var(--buyer); padding: 10px 12px; }
+  .hops li.s { border-left-color: var(--seller); }
+  .hops li + li { border-left-width: 5px; margin-top: 2px; }
+  .hops li.cut { border-bottom: 2px dashed var(--fg); }
+  .hops li.cut::after { right: 8px; top: auto; bottom: -11px; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) { .hops li { transition: none; } }
 </style>
 <style>*{box-sizing:border-box}body{margin:0}.back{font-size:0.9rem}.back a{color:var(--accent)}</style>
 </head>
@@ -122,13 +156,34 @@ footer { font-size: 0.85rem; color: var(--muted); }
       <thead><tr><th>คำถาม</th><th>คำตอบที่ควรได้</th><th>ระวัง</th></tr></thead>
       <tbody>
         <tr><td class="q">สั่งขั้นต่ำเท่าไร คละขนาดได้ไหม</td><td class="a">คละขนาดได้ และรับส่งแบบไม่เต็มตู้ (LCL) สำหรับออเดอร์แรก</td><td class="f">ต้องเต็มตู้ 20 ฟุตตั้งแต่ครั้งแรก</td></tr>
-        <tr><td class="q">ราคาต่อชุดแต่ละขนาด</td><td class="a">ให้ใบเสนอราคาแยกขนาด ทั้งราคา FOB และ CIF ถึงท่าเรือกรุงเทพ ระบุวันหมดอายุของราคา</td><td class="f">ให้ราคารวมๆ ไม่แยกขนาด หรือไม่บอกว่ารวมค่าขนส่งหรือยัง</td></tr>
+        <tr><td class="q">ราคาต่อชุดแต่ละขนาด <a href="#incoterms" style="color:var(--accent);font-weight:500">(FOB CIF ต่างกันยังไง)</a></td><td class="a">ให้ใบเสนอราคาแยกขนาด ทั้งราคา FOB และ CIF ถึงท่าเรือกรุงเทพ ระบุวันหมดอายุของราคา</td><td class="f">ให้ราคารวมๆ ไม่แยกขนาด หรือไม่บอกว่ารวมค่าขนส่งหรือยัง</td></tr>
         <tr><td class="q">ถ้าส่งถึงหน้าร้าน (DDP) ได้ไหม ราคาเท่าไร</td><td class="a">ทำได้ ราคาจะสูงกว่า แต่สำหรับมือใหม่เหมาะกับล็อตแรก เพราะไม่ต้องจัดการพิธีศุลกากรเอง</td><td class="f">ราคา DDP ต่ำผิดปกติ อาจสำแดงต่ำ เสี่ยงโดนปรับ</td></tr>
         <tr><td class="q">เงื่อนไขการจ่ายเงิน</td><td class="a">มัดจำ 30% จ่ายที่เหลือก่อนส่งของ เป็นแบบที่พบบ่อย</td><td class="f">ขอโอนเต็ม 100% ล่วงหน้าตั้งแต่ครั้งแรก</td></tr>
         <tr><td class="q">ผลิตกี่วัน</td><td class="a">บอกเป็นจำนวนวันชัดเจนนับจากวันมัดจำ</td><td class="f">ตอบว่า "แล้วแต่ช่วง" ไม่ยอมระบุ</td></tr>
         <tr><td class="q">ขอตัวอย่างได้ไหม</td><td class="a">ได้ ฟรีหรือหักคืนจากออเดอร์แรก</td><td class="f">ตัวอย่างคิดราคาเต็มและไม่หักคืน</td></tr>
       </tbody>
     </table>
+  </section>
+
+  <section id="incoterms">
+    <h2>FOB / CIF / DDP ต่างกันยังไง</h2>
+    <p class="lead">กดเลือกเงื่อนไข แล้วดูว่าแต่ละช่วงจากโรงงานถึงร้าน ใครเป็นคนจ่าย</p>
+    <div class="ic-tabs" role="tablist" aria-label="เลือกเงื่อนไขราคา">
+      <button type="button" id="ic-fob" role="tab" data-term="fob" aria-selected="true">FOB</button>
+      <button type="button" id="ic-cif" role="tab" data-term="cif" aria-selected="false">CIF</button>
+      <button type="button" id="ic-ddp" role="tab" data-term="ddp" aria-selected="false">DDP</button>
+    </div>
+    <div class="ic-legend"><span><i class="sw sw-s"></i>ผู้ขายจ่าย (รวมในราคาที่เขาเสนอ)</span><span><i class="sw sw-b"></i>เราจ่ายเพิ่มเอง</span></div>
+    <ol class="hops" id="ic-hops">
+      <li data-hop="1"><span class="n">1</span><span class="h">ผลิตและแพ็คที่โรงงาน</span><span class="who"></span></li>
+      <li data-hop="2"><span class="n">2</span><span class="h">ขนจากโรงงานไปท่าเรือจีน</span><span class="who"></span></li>
+      <li data-hop="3"><span class="n">3</span><span class="h">พิธีส่งออกและยกขึ้นเรือ</span><span class="who"></span></li>
+      <li data-hop="4"><span class="n">4</span><span class="h">ค่าเรือและค่าประกันระหว่างทาง</span><span class="who"></span></li>
+      <li data-hop="5"><span class="n">5</span><span class="h">ค่าใช้จ่ายที่ท่าเรือกรุงเทพ</span><span class="who"></span></li>
+      <li data-hop="6"><span class="n">6</span><span class="h">ภาษีนำเข้า VAT 7% และเคลียร์ศุลกากร</span><span class="who"></span></li>
+      <li data-hop="7"><span class="n">7</span><span class="h">ขนจากท่าเรือมาถึงร้าน</span><span class="who"></span></li>
+    </ol>
+    <div class="ic-sum" id="ic-sum" aria-live="polite"></div>
   </section>
 
   <section>
@@ -170,5 +225,42 @@ footer { font-size: 0.85rem; color: var(--muted); }
 
   <footer>ทำเมื่อ 11 พ.ย. 2569 สำหรับงาน HTF Thailand 2026 ช่องคำตอบที่ควรได้เป็นความเห็นเบื้องต้น ตัวเลขจริงต้องเทียบจากใบเสนอราคาหลายเจ้า</footer>
 </div>
+<script>
+(function () {
+  var T = {
+    fob: { last: 3, name: "FOB (Free On Board)",
+      sum: ["ผู้ขายจ่ายถึงแค่ยกของขึ้นเรือที่ท่าเรือจีน (ช่วง 1 ถึง 3)",
+            "เราต้องหาชิปปิ้งหรือ forwarder เอง และจ่ายค่าเรือ ค่าประกัน ค่าท่าเรือ ภาษี และค่าขนมาร้าน (ช่วง 4 ถึง 7)",
+            "ความเสี่ยงย้ายมาเป็นของเราตั้งแต่ของขึ้นเรือ",
+            "เหมาะเมื่อ มีชิปปิ้งประจำอยู่แล้ว มักได้ต้นทุนรวมถูกที่สุด"] },
+    cif: { last: 4, name: "CIF (Cost, Insurance, Freight)",
+      sum: ["ผู้ขายจ่ายเพิ่มค่าเรือและค่าประกันมาถึงท่าเรือกรุงเทพ (ช่วง 1 ถึง 4) ราคาจึงสูงกว่า FOB",
+            "เรายังต้องจ่ายค่าท่าเรือ ภาษีนำเข้า VAT และค่าขนมาร้านเอง (ช่วง 5 ถึง 7)",
+            "ระวัง แม้ผู้ขายจ่ายค่าเรือ แต่ความเสี่ยงย้ายมาเป็นของเราตั้งแต่ของขึ้นเรือที่จีนเหมือน FOB และค่าท่าเรือปลายทางอาจถูกบวกเพิ่มเยอะ",
+            "เหมาะเมื่อ ยังไม่มีชิปปิ้งฝั่งจีน แต่พอจัดการพิธีนำเข้าในไทยได้"] },
+    ddp: { last: 7, name: "DDP (Delivered Duty Paid)",
+      sum: ["ผู้ขายจัดการและจ่ายทุกช่วงรวมภาษีจนของถึงหน้าร้าน (ช่วง 1 ถึง 7)",
+            "เราแค่รับของ ราคาสูงสุดในสามแบบ",
+            "ระวัง ราคา DDP ที่ถูกผิดปกติอาจมาจากการสำแดงราคาต่ำ เสี่ยงโดนปรับ ขอเอกสารใบขนสินค้าและใบเสร็จภาษีทุกครั้ง",
+            "เหมาะเมื่อ นำเข้าล็อตแรก อยากลองตลาดโดยไม่ต้องเรียนพิธีศุลกากร"] }
+  };
+  var hops = document.querySelectorAll("#ic-hops li");
+  var sum = document.getElementById("ic-sum");
+  var tabs = document.querySelectorAll(".ic-tabs button");
+  function show(k) {
+    var t = T[k];
+    hops.forEach(function (li, i) {
+      var seller = i + 1 <= t.last;
+      li.classList.toggle("s", seller);
+      li.classList.toggle("cut", i + 1 === t.last && t.last < 7);
+      li.querySelector(".who").textContent = seller ? "ผู้ขายจ่าย" : "เราจ่าย";
+    });
+    tabs.forEach(function (b) { b.setAttribute("aria-selected", b.dataset.term === k ? "true" : "false"); });
+    sum.innerHTML = "<p><b>" + t.name + "</b></p>" + t.sum.map(function (s) { return "<p>" + s + "</p>"; }).join("");
+  }
+  tabs.forEach(function (b) { b.addEventListener("click", function () { show(b.dataset.term); }); });
+  show("fob");
+})();
+</script>
 </body>
 </html>
