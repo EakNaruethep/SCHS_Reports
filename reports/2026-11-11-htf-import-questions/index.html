@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>คำถามนำเข้าพุกเคมี HTF 2026</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: single reading column, one table per category; on phones each row stacks into a block */
+:root {
+  --bg: #f6f7f8;
+  --surface: #ffffff;
+  --fg: #1d2329;
+  --muted: #5b6670;
+  --line: #d9dee3;
+  --accent: #1f5f8b;
+  --flag: #a3361f;
+  --flag-bg: #fbeee9;
+  --good-bg: #eaf3ec;
+  --good: #24633a;
+  --font: "IBM Plex Sans Thai", "Noto Sans Thai", "Leelawadee UI", Tahoma, sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #14181c; --surface: #1c2227; --fg: #e6eaee; --muted: #9aa6b1; --line: #2e363d;
+  --accent: #7db8e0; --flag: #f0a08b; --flag-bg: #2e1f1b; --good-bg: #1b2a20; --good: #8fd1a4; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #14181c; --surface: #1c2227; --fg: #e6eaee; --muted: #9aa6b1; --line: #2e363d;
+  --accent: #7db8e0; --flag: #f0a08b; --flag-bg: #2e1f1b; --good-bg: #1b2a20; --good: #8fd1a4; color-scheme: dark }
+body { background: var(--bg); color: var(--fg); font-family: var(--font); font-size: 15px; line-height: 1.6; }
+.wrap { max-width: 980px; margin: 0 auto; padding-block: 24px 48px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: grid; gap: 28px; }
+h1 { font-size: 1.5rem; line-height: 1.3; margin: 0; text-wrap: balance; }
+h2 { font-size: 1.15rem; margin: 0 0 8px; color: var(--accent); text-wrap: balance; }
+p { margin: 0; }
+.lead { color: var(--muted); max-width: 65ch; }
+.legend { display: flex; flex-wrap: wrap; gap: 8px 16px; font-size: 0.9rem; color: var(--muted); }
+.legend span b { font-weight: 600; }
+.k-good { color: var(--good); } .k-flag { color: var(--flag); }
+table { width: 100%; border-collapse: collapse; background: var(--surface); border: 1px solid var(--line); }
+th, td { text-align: left; vertical-align: top; padding: 10px 12px; border-bottom: 1px solid var(--line); }
+th { font-size: 0.85rem; font-weight: 600; color: var(--muted); letter-spacing: 0.02em; background: var(--bg); }
+th:nth-child(1) { width: 30%; } th:nth-child(2) { width: 40%; } th:nth-child(3) { width: 30%; }
+td.q { font-weight: 600; }
+td.a { background: var(--good-bg); }
+td.f { background: var(--flag-bg); }
+.note { font-size: 0.88rem; color: var(--muted); margin-top: 6px; }
+.prep { background: var(--surface); border: 1px solid var(--line); padding: 16px; display: grid; gap: 8px; }
+.prep ul { margin: 0; padding-left: 1.2em; display: grid; gap: 6px; }
+footer { font-size: 0.85rem; color: var(--muted); }
+@media (max-width: 640px) {
+  table, thead, tbody, tr, td { display: block; width: 100%; }
+  thead { display: none; }
+  table { border: 0; background: transparent; }
+  tr { background: var(--surface); border: 1px solid var(--line); margin-bottom: 10px; }
+  td { border-bottom: 0; padding: 8px 12px; }
+  td.a::before, td.f::before { display: block; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.02em; }
+  td.a::before { content: "คำตอบที่ควรได้"; color: var(--good); }
+  td.f::before { content: "ระวังถ้าได้ยินแบบนี้"; color: var(--flag); }
+}
+</style>
+<style>*{box-sizing:border-box}body{margin:0}.back{font-size:0.9rem}.back a{color:var(--accent)}</style>
+</head>
+<body>
+
+<div class="wrap">
+  <p class="back"><a href="../../">← รายงานทั้งหมด</a></p>
+  <header style="display:grid;gap:10px">
+    <h1>คำถามสำหรับคุยกับผู้ผลิตพุกเคมี งาน HTF Thailand 2026</h1>
+    <p class="lead">เป้าหมายคือหาพุกเคมีมาทำแบรนด์ของ ส.เจริญโฮมสแควร์ เอง แทน Kingfisher เรียงหมวดตามความสำคัญ ช่องคำตอบที่ควรได้เป็นความเห็นสำหรับคนนำเข้าครั้งแรก ไม่ใช่กฎตายตัว ถ้าเวลาน้อยให้ถามหมวด 1 กับ 5 ก่อน</p>
+    <div class="legend"><span><b class="k-good">คำตอบที่ควรได้</b> ได้ยินแบบนี้ถือว่าน่าคุยต่อ</span><span><b class="k-flag">ระวัง</b> ได้ยินแบบนี้ให้ถามต่อหรือข้ามบูธ</span></div>
+  </header>
+
+  <section>
+    <h2>1. เอกสารมาตรฐาน (ETA และ AIT)</h2>
+    <table>
+      <thead><tr><th>คำถาม</th><th>คำตอบที่ควรได้</th><th>ระวัง</th></tr></thead>
+      <tbody>
+        <tr><td class="q">มี ETA ไหม ขอเลขที่ด้วย</td><td class="a">บอกเลขที่ได้ทันที เช่น ETA-xx/xxxx ส่งไฟล์ PDF ให้ได้ และค้นเจอในเว็บ EOTA (eota.eu) ชื่อผู้ถือตรงกับบริษัทที่คุย</td><td class="f">บอกแค่ว่า "มี CE" หรือมีแค่รูปใบรับรองแต่บอกเลขที่ไม่ได้</td></tr>
+        <tr><td class="q">ETA ออกในชื่อบริษัทไหน ผลิตที่โรงงานไหน</td><td class="a">ผู้ถือ ETA คือโรงงานนี้เอง หรือบอกได้ชัดว่าใครผลิต</td><td class="f">เป็นบริษัทเทรดดิ้งที่อ้าง ETA ของโรงงานอื่น แต่ไม่ยอมบอกชื่อโรงงาน</td></tr>
+        <tr><td class="q">ETA ครอบคลุมรุ่นไหน ขนาดไหน</td><td class="a">ตรงกับรุ่นที่เราจะซื้อ ครอบคลุม M10 ถึง M24 เป็นอย่างน้อย ระบุว่าใช้ในคอนกรีตไม่ร้าว ถ้ารวมคอนกรีตร้าวด้วยยิ่งดี</td><td class="f">ETA เป็นของรุ่นแบบฉีด แต่จะขายหลอดแก้วให้เรา (คนละรุ่นกัน)</td></tr>
+        <tr><td class="q">มี DoP และเครื่องหมาย CE ไหม</td><td class="a">มีครบ ส่งเป็นไฟล์ได้ และพิมพ์ CE บนกล่องได้</td><td class="f">มี ETA แต่ไม่มี DoP</td></tr>
+        <tr><td class="q">ส่งตัวอย่างไปทดสอบที่ AIT ได้ไหม</td><td class="a">ยินดีส่งตัวอย่างฟรี หรือเก็บแค่ค่าส่ง</td><td class="f">ไม่อยากให้ทดสอบ หรือคิดราคาตัวอย่างแพงผิดปกติ</td></tr>
+        <tr><td class="q">ETA ออกเป็นชื่อแบรนด์เราได้ไหม</td><td class="a">ทำได้ บอกค่าใช้จ่ายและระยะเวลาได้</td><td class="f">ไม่ใช่เหตุให้ข้ามบูธ แต่ถ้าทำไม่ได้ เราจะอ้าง ETA ในชื่อแบรนด์เราบนเว็บไม่ได้ ใช้ได้แค่ผล AIT ที่เราทดสอบเอง</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>2. ตัวสินค้า</h2>
+    <table>
+      <thead><tr><th>คำถาม</th><th>คำตอบที่ควรได้</th><th>ระวัง</th></tr></thead>
+      <tbody>
+        <tr><td class="q">น้ำยาเป็นเรซิ่นชนิดไหน</td><td class="a">ไวนิลเอสเตอร์ (vinylester) และไม่มีสไตรีน (styrene free)</td><td class="f">ตอบไม่ได้ หรือเป็นโพลีเอสเตอร์ราคาถูกแต่บอกว่าเกรดเดียวกัน</td></tr>
+        <tr><td class="q">อายุสินค้า (shelf life) กี่เดือน</td><td class="a">อย่างน้อย 12 เดือนนับจากวันผลิต ยาวกว่านี้ยิ่งดี เพราะขนส่งทางเรือและเก็บสต๊อกกินเวลาไปหลายเดือน</td><td class="f">อายุสั้น หรือไม่ระบุวันผลิตบนหลอด</td></tr>
+        <tr><td class="q">เก็บในโกดังร้อนได้ไหม อุณหภูมิสูงสุดเท่าไร</td><td class="a">บอกอุณหภูมิเก็บสูงสุดได้ชัด และไม่ต่ำกว่าอากาศในโกดังไทย</td><td class="f">ต้องเก็บห้องแอร์ตลอด ซึ่งต้นทุนเราจะสูงขึ้น</td></tr>
+        <tr><td class="q">มีตารางเวลาเซ็ตตัวที่อุณหภูมิ 30 ถึง 40 องศาไหม</td><td class="a">มีตารางเวลาเจลและเวลาแข็งตัวครอบคลุมถึง 40 องศา</td><td class="f">ตารางหยุดที่ 20 ถึง 25 องศา ไม่เหมาะกับหน้างานไทย</td></tr>
+        <tr><td class="q">ทำเป็นชุดพร้อมสตัด น็อต แหวนได้ไหม</td><td class="a">ทำได้ สตัดเกรด 5.8 ชุบกัลวาไนซ์เป็นมาตรฐาน เกรด 8.8 สั่งได้ และมีใบรับรองเหล็ก (mill certificate)</td><td class="f">ขายแค่หลอด เราต้องหาสตัดเอง (ทำได้ แต่จัดการยากขึ้น)</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>3. ทำแบรนด์ของร้านเอง (OEM)</h2>
+    <table>
+      <thead><tr><th>คำถาม</th><th>คำตอบที่ควรได้</th><th>ระวัง</th></tr></thead>
+      <tbody>
+        <tr><td class="q">ทำแบรนด์ลูกค้าได้ไหม สั่งขั้นต่ำเท่าไร</td><td class="a">ทำได้ และมีทางเริ่มแบบเล็ก เช่น ใช้หลอดเดิมแต่พิมพ์กล่องและฉลากเป็นแบรนด์เราก่อน แล้วค่อยพิมพ์บนหลอดเมื่อยอดขายถึง</td><td class="f">ต้องพิมพ์บนหลอดตั้งแต่ล็อตแรก ขั้นต่ำสูงมาก</td></tr>
+        <tr><td class="q">สูตรน้ำยาล็อกไว้ไหม ถ้าเปลี่ยนต้องแจ้งก่อนไหม</td><td class="a">ยินดีเขียนในสัญญาว่าเปลี่ยนสูตรหรือวัตถุดิบต้องแจ้งล่วงหน้า</td><td class="f">ไม่รับปาก ถ้าสูตรเปลี่ยน ผล AIT ที่เราทดสอบไว้ก็ใช้ไม่ได้</td></tr>
+        <tr><td class="q">มีใบ QC ทุกล็อต หลอดมีเลขล็อตและวันหมดอายุไหม</td><td class="a">มีใบ QC แยกล็อต พิมพ์เลขล็อตและวันหมดอายุบนหลอดหรือกล่องทุกชิ้น</td><td class="f">ไม่มีเลขล็อต เวลาลูกค้าร้องเรียนจะตามย้อนไม่ได้</td></tr>
+        <tr><td class="q">ให้สิทธิ์ขายแต่เพียงผู้เดียวในไทยได้ไหม</td><td class="a">ให้ได้ โดยกำหนดยอดสั่งต่อปีเป็นตัวเลขชัดเจน</td><td class="f">ขายหลอดหน้าตาเดียวกันให้ร้านอื่นในไทยอยู่แล้ว</td></tr>
+        <tr><td class="q">ไฟล์ออกแบบ ฉลาก บล็อกพิมพ์ ใครเป็นเจ้าของ</td><td class="a">ลูกค้าเป็นเจ้าของ ขอไฟล์คืนได้</td><td class="f">โรงงานถือไว้ ถ้าเปลี่ยนโรงงานต้องทำใหม่หมด</td></tr>
+        <tr><td class="q">ให้เอกสารเทคนิคเป็นไฟล์แก้ไขได้ไหม</td><td class="a">ให้ตารางขนาด รูเจาะ ความลึก เวลาเซ็ตตัว เป็นไฟล์ที่เราเอาไปทำแคตตาล็อกแบรนด์เราได้</td><td class="f">ให้แค่ PDF ที่มีโลโก้โรงงาน</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>4. ราคาและการสั่งซื้อ</h2>
+    <table>
+      <thead><tr><th>คำถาม</th><th>คำตอบที่ควรได้</th><th>ระวัง</th></tr></thead>
+      <tbody>
+        <tr><td class="q">สั่งขั้นต่ำเท่าไร คละขนาดได้ไหม</td><td class="a">คละขนาดได้ และรับส่งแบบไม่เต็มตู้ (LCL) สำหรับออเดอร์แรก</td><td class="f">ต้องเต็มตู้ 20 ฟุตตั้งแต่ครั้งแรก</td></tr>
+        <tr><td class="q">ราคาต่อชุดแต่ละขนาด</td><td class="a">ให้ใบเสนอราคาแยกขนาด ทั้งราคา FOB และ CIF ถึงท่าเรือกรุงเทพ ระบุวันหมดอายุของราคา</td><td class="f">ให้ราคารวมๆ ไม่แยกขนาด หรือไม่บอกว่ารวมค่าขนส่งหรือยัง</td></tr>
+        <tr><td class="q">ถ้าส่งถึงหน้าร้าน (DDP) ได้ไหม ราคาเท่าไร</td><td class="a">ทำได้ ราคาจะสูงกว่า แต่สำหรับมือใหม่เหมาะกับล็อตแรก เพราะไม่ต้องจัดการพิธีศุลกากรเอง</td><td class="f">ราคา DDP ต่ำผิดปกติ อาจสำแดงต่ำ เสี่ยงโดนปรับ</td></tr>
+        <tr><td class="q">เงื่อนไขการจ่ายเงิน</td><td class="a">มัดจำ 30% จ่ายที่เหลือก่อนส่งของ เป็นแบบที่พบบ่อย</td><td class="f">ขอโอนเต็ม 100% ล่วงหน้าตั้งแต่ครั้งแรก</td></tr>
+        <tr><td class="q">ผลิตกี่วัน</td><td class="a">บอกเป็นจำนวนวันชัดเจนนับจากวันมัดจำ</td><td class="f">ตอบว่า "แล้วแต่ช่วง" ไม่ยอมระบุ</td></tr>
+        <tr><td class="q">ขอตัวอย่างได้ไหม</td><td class="a">ได้ ฟรีหรือหักคืนจากออเดอร์แรก</td><td class="f">ตัวอย่างคิดราคาเต็มและไม่หักคืน</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>5. ขนส่งและนำเข้า</h2>
+    <table>
+      <thead><tr><th>คำถาม</th><th>คำตอบที่ควรได้</th><th>ระวัง</th></tr></thead>
+      <tbody>
+        <tr><td class="q">เป็นสินค้าอันตราย (DG) ตอนขนส่งไหม</td><td class="a">ตอบได้ชัด มีเอกสาร SDS และรู้ว่าต้องส่งแบบไหน</td><td class="f">ไม่รู้ หรือบอกให้สำแดงเป็นอย่างอื่น ซึ่งผิดกฎและอันตราย</td></tr>
+        <tr><td class="q">พิกัดศุลกากร (HS code) คืออะไร</td><td class="a">บอกได้ทันที</td><td class="f">ไม่รู้ แปลว่าไม่ค่อยได้ส่งออก</td></tr>
+        <tr><td class="q">ออก Form E ได้ไหม (ถ้าผลิตในจีน)</td><td class="a">ออกได้ทุกชิปเมนต์ ช่วยลดภาษีนำเข้า</td><td class="f">ออกไม่ได้ ต้นทุนภาษีจะสูงขึ้น</td></tr>
+        <tr><td class="q">เคยส่งมาไทยไหม มีชิปปิ้งแนะนำไหม</td><td class="a">เคย มีชิปปิ้งหรือ forwarder ที่ส่งมาไทยประจำ ช่วยมือใหม่ได้มาก</td><td class="f">ไม่เคยส่งมาไทยเลย</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>6. ความน่าเชื่อถือของผู้ขาย</h2>
+    <table>
+      <thead><tr><th>คำถาม</th><th>คำตอบที่ควรได้</th><th>ระวัง</th></tr></thead>
+      <tbody>
+        <tr><td class="q">เป็นโรงงานเองหรือบริษัทเทรดดิ้ง</td><td class="a">โรงงานเอง ไปดูโรงงานหรือวิดีโอคอลดูไลน์ผลิตได้</td><td class="f">เลี่ยงไม่ตอบ หรือไม่ให้ดูโรงงาน</td></tr>
+        <tr><td class="q">ส่งออกไปประเทศไหนบ้าง กี่ปีแล้ว</td><td class="a">ส่งออกหลายปี มีลูกค้าในยุโรปด้วย (สอดคล้องกับการมี ETA)</td><td class="f">มี ETA แต่ไม่เคยขายยุโรปเลย ให้ถามต่อว่าทำ ETA ไปทำไม</td></tr>
+        <tr><td class="q">มีตัวแทนในไทยแล้วหรือยัง</td><td class="a">ยังไม่มี หรือมีน้อย เราจะไม่ต้องแข่งราคากับคนขายของเดียวกัน</td><td class="f">มีหลายเจ้าในไทยแล้ว</td></tr>
+        <tr><td class="q">ถ้าของเสียหรือไม่ตรงสเปก ทำอย่างไร</td><td class="a">ส่งใหม่หรือคืนเงิน เขียนเงื่อนไขในสัญญาได้</td><td class="f">ตอบว่าไม่เคยมีของเสีย</td></tr>
+        <tr><td class="q">(ถามทุกบูธ) รู้จักตัวแทน fischer, Würth หรือ MKT ในไทยไหม</td><td class="a">ได้ชื่อบริษัทหรือนามบัตรมา ใช้ตามหาพุกเคมีเยอรมันต่อได้</td><td class="f">แบรนด์เยอรมันส่วนใหญ่น่าจะไม่ทำแบรนด์ให้ร้านเรา ถ้าคุยได้ถือว่าเป็นโอกาสดี</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="prep">
+    <h2 style="margin:0">ฝั่งร้านต้องเตรียมเอง (ไม่ต้องถามบูธ)</h2>
+    <ul>
+      <li>จดเครื่องหมายการค้าชื่อแบรนด์ที่กรมทรัพย์สินทางปัญญาก่อนสั่งผลิต</li>
+      <li>วางงบส่งตัวอย่างไปทดสอบที่ AIT ใหม่ในชื่อแบรนด์เรา ผล AIT เดิมเป็นของ Kingfisher KR Resin ใช้แทนกันไม่ได้</li>
+      <li>ขอตัวอย่างจาก 2 ถึง 3 เจ้ากลับมาเทียบกัน อย่าเพิ่งตกลงหรือโอนเงินที่งาน</li>
+      <li>ถ่ายรูปบูธ นามบัตร และหน้า ETA ที่โชว์ไว้ทุกเจ้า ส่งมาในเธรดเพื่อเช็กเลข ETA</li>
+    </ul>
+  </section>
+
+  <footer>ทำเมื่อ 11 พ.ย. 2569 สำหรับงาน HTF Thailand 2026 ช่องคำตอบที่ควรได้เป็นความเห็นเบื้องต้น ตัวเลขจริงต้องเทียบจากใบเสนอราคาหลายเจ้า</footer>
+</div>
+</body>
+</html>
